@@ -46,58 +46,58 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat; 
 import org.json.simple.*;
 
-int op = Integer.parseInt(vars.get(&quot;contadorA&quot;));
-int calidad = ThreadLocalRandom.current().nextInt(256);
-int ubicacion = ThreadLocalRandom.current().nextInt(3);
-int producto = ThreadLocalRandom.current().nextInt(100);
-int color = ThreadLocalRandom.current().nextInt(500);
-int modelo = ThreadLocalRandom.current().nextInt(1000);
-int modelob = modelo + 1;
-int modeloc = modelo + 2;
-int seccion = ThreadLocalRandom.current().nextInt(3);
-int talla = ThreadLocalRandom.current().nextInt(10);
-int tallab = talla + 1;
-int tallac = talla + 2;
-int tienda = ThreadLocalRandom.current().nextInt(500);
+int po = Integer.parseInt(vars.get(&quot;contadorA&quot;));
+int comoestas = ThreadLocalRandom.current().nextInt(256);
+int ande = ThreadLocalRandom.current().nextInt(3);
+int cualo = ThreadLocalRandom.current().nextInt(100);
+int pinta = ThreadLocalRandom.current().nextInt(500);
+int cosa = ThreadLocalRandom.current().nextInt(1000);
+int cosab = cosa + 1;
+int cosac = cosa + 2;
+int subande = ThreadLocalRandom.current().nextInt(3);
+int tripa = ThreadLocalRandom.current().nextInt(10);
+int tripab = tripa + 1;
+int tripac = tripa + 2;
+int ultramarinos = ThreadLocalRandom.current().nextInt(500);
 
-strCalidadA = String.valueOf(calidad);
-strProductoA = String.valueOf(producto);
-strUbicacionA = String.valueOf(ubicacion);
-strColorA =  String.valueOf(color);
-strModeloA =  String.valueOf(modelo);
-strModeloB =  String.valueOf(modelob);
-strModeloC =  String.valueOf(modeloc);
-strSeccionA = String.valueOf(seccion);
-strTallaA = String.valueOf(talla);
-strTallaB = String.valueOf(tallab);
-strTallaC = String.valueOf(tallac);
-strTiendaA = String.valueOf(tienda);
-strFechaA = String.valueOf(System.currentTimeMillis()+op);
+strcomoestasA = String.valueOf(comoestas);
+strcualoA = String.valueOf(cualo);
+strandeA = String.valueOf(ande);
+strpintaA =  String.valueOf(pinta);
+strcosaA =  String.valueOf(cosa);
+strcosaB =  String.valueOf(cosab);
+strcosaC =  String.valueOf(cosac);
+strsubandeA = String.valueOf(subande);
+strtripaA = String.valueOf(tripa);
+strtripaB = String.valueOf(tripab);
+strtripaC = String.valueOf(tripac);
+strultramarinosA = String.valueOf(ultramarinos);
+strFechaA = String.valueOf(System.currentTimeMillis()+po);
 
 churro = &quot;[&quot; +
   &quot;{&quot;+
     &quot;\&quot;updateId\&quot; :&quot; + strFechaA + &quot;,&quot; +
-    &quot;\&quot;store\&quot; :&quot; + strTiendaA + &quot;,&quot; +
-    &quot;\&quot;section\&quot; :&quot; + strSeccionA + &quot;,&quot; +
-    &quot;\&quot;changes\&quot; :&quot; + &quot;[&quot; +
+    &quot;\&quot;ultra\&quot; :&quot; + strultramarinosA + &quot;,&quot; +
+    &quot;\&quot;ande\&quot; :&quot; + strsubandeA + &quot;,&quot; +
+    &quot;\&quot;descambiar\&quot; :&quot; + &quot;[&quot; +
       &quot;{&quot; +
         &quot;\&quot;to\&quot; : 1,&quot; +
         &quot;\&quot;timestamp\&quot;: 1516614117701,&quot; +
-        &quot;\&quot;items\&quot;: [&quot; +
+        &quot;\&quot;cosas\&quot;: [&quot; +
           &quot;{&quot; +
-            &quot;\&quot;productCode\&quot;:&quot; +strProductoA + &quot;,&quot; +
-            &quot;\&quot;model\&quot;:&quot; + strModeloB + &quot;,&quot; +
-            &quot;\&quot;quality\&quot;:&quot; + strCalidadA + &quot;,&quot; +
-            &quot;\&quot;color\&quot;:&quot; + strColorA + &quot;,&quot; +
-            &quot;\&quot;size\&quot;: &quot; + strTallaA + &quot;,&quot; +
+            &quot;\&quot;numerico\&quot;:&quot; +strcualoA + &quot;,&quot; +
+            &quot;\&quot;cosa\&quot;:&quot; + strcosaB + &quot;,&quot; +
+            &quot;\&quot;pinta\&quot;:&quot; + strcomoestasA + &quot;,&quot; +
+            &quot;\&quot;pinta\&quot;:&quot; + strpintaA + &quot;,&quot; +
+            &quot;\&quot;tripi\&quot;: &quot; + strtripaA + &quot;,&quot; +
             &quot;\&quot;serialNumber\&quot;: 1086554643&quot; +
           &quot;},&quot; +
           &quot;{&quot; +
-            &quot;\&quot;productCode\&quot;:&quot; + strProductoA + &quot;,&quot; +
-            &quot;\&quot;model\&quot;:&quot; + strModeloC + &quot;,&quot; +
-            &quot;\&quot;quality\&quot;:&quot; + strCalidadA + &quot;,&quot; +
-            &quot;\&quot;color\&quot;:&quot; +  strColorA + &quot;,&quot; +
-            &quot;\&quot;size\&quot;:&quot; +  strTallaC + &quot;,&quot; +
+            &quot;\&quot;numerico\&quot;:&quot; + strcualoA + &quot;,&quot; +
+            &quot;\&quot;cosa\&quot;:&quot; + strcosaC + &quot;,&quot; +
+            &quot;\&quot;pinta\&quot;:&quot; + strcomoestasA + &quot;,&quot; +
+            &quot;\&quot;pinta\&quot;:&quot; +  strpintaA + &quot;,&quot; +
+            &quot;\&quot;tripi\&quot;:&quot; +  strtripaC + &quot;,&quot; +
             &quot;\&quot;serialNumber\&quot;: 984191606&quot; +
           &quot;}&quot; +
         &quot;]&quot; +
@@ -105,13 +105,13 @@ churro = &quot;[&quot; +
       &quot;{&quot; +
         &quot;\&quot;to\&quot;: 3,&quot; +
         &quot;\&quot;timestamp\&quot;: 1516614117701,&quot;+
-        &quot;\&quot;items\&quot;: [&quot; +
+        &quot;\&quot;cosas\&quot;: [&quot; +
            &quot;{&quot; +
-            &quot;\&quot;productCode\&quot;:&quot; + strProductoA + &quot;,&quot; +
-            &quot;\&quot;model\&quot;:&quot; + strModeloA + &quot;,&quot; +
-            &quot;\&quot;quality\&quot;:&quot; + strCalidadA + &quot;,&quot; +
-            &quot;\&quot;color\&quot;:&quot; + strColorA + &quot;,&quot; +
-            &quot;\&quot;size\&quot;:&quot; + strTallaA + &quot;,&quot; +
+            &quot;\&quot;numerico\&quot;:&quot; + strcualoA + &quot;,&quot; +
+            &quot;\&quot;cosa\&quot;:&quot; + strcosaA + &quot;,&quot; +
+            &quot;\&quot;pinta\&quot;:&quot; + strcomoestasA + &quot;,&quot; +
+            &quot;\&quot;pinta\&quot;:&quot; + strpintaA + &quot;,&quot; +
+            &quot;\&quot;tripi\&quot;:&quot; + strtripaA + &quot;,&quot; +
             &quot;\&quot;serialNumber\&quot;: 1086554643&quot; +
           &quot;}&quot; +
         &quot;]&quot; +
@@ -120,17 +120,7 @@ churro = &quot;[&quot; +
   &quot;}&quot; +
 &quot;]&quot;;
 
-vars.put(&quot;message&quot;, churro);
-
-
-
-
-
-
-
-
-
-</stringProp>
+vars.put(&quot;message&quot;, churro);</stringProp>
           <stringProp name="scriptLanguage">java</stringProp>
         </JSR223PreProcessor>
         <hashTree/>
@@ -139,7 +129,7 @@ vars.put(&quot;message&quot;, churro);
             <collectionProp name="Arguments.arguments">
               <elementProp name="kafka_brokers" elementType="Argument">
                 <stringProp name="Argument.name">kafka_brokers</stringProp>
-                <stringProp name="Argument.value">130.61.86.204:6667,130.61.113.170:6667,130.61.47.254:6667,130.61.112.70:6667,130.61.87.248:6667</stringProp>
+                <stringProp name="Argument.value">130.61.x.y:6667,130.61.x.y:6667,130.61.x.y:6667,130.61.x.y:6667,130.61.x.y:6667</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
               <elementProp name="kafka_topic" elementType="Argument">
