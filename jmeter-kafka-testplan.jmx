@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.0 r1840935">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Plan de Pruebas" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="Variables definidas por el Usuario" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Kafka Test" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Controlador Bucle" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">10</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <longProp name="ThreadGroup.start_time">1519643700000</longProp>
+        <longProp name="ThreadGroup.end_time">1519644300000</longProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">2000</stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="Counter" enabled="true">
+          <stringProp name="maximumValue">999999999</stringProp>
+          <stringProp name="minimumValue">1</stringProp>
+          <stringProp name="outputFormat"></stringProp>
+          <boolProp name="perThread">false</boolProp>
+          <stringProp name="randomSeed"></stringProp>
+          <stringProp name="variableName">contadorA</stringProp>
+        </RandomVariableConfig>
+        <hashTree/>
+        <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat; 
+import org.json.simple.*;
+
+int op = Integer.parseInt(vars.get(&quot;contadorA&quot;));
+int calidad = ThreadLocalRandom.current().nextInt(256);
+int ubicacion = ThreadLocalRandom.current().nextInt(3);
+int producto = ThreadLocalRandom.current().nextInt(100);
+int color = ThreadLocalRandom.current().nextInt(500);
+int modelo = ThreadLocalRandom.current().nextInt(1000);
+int modelob = modelo + 1;
+int modeloc = modelo + 2;
+int seccion = ThreadLocalRandom.current().nextInt(3);
+int talla = ThreadLocalRandom.current().nextInt(10);
+int tallab = talla + 1;
+int tallac = talla + 2;
+int tienda = ThreadLocalRandom.current().nextInt(500);
+
+strCalidadA = String.valueOf(calidad);
+strProductoA = String.valueOf(producto);
+strUbicacionA = String.valueOf(ubicacion);
+strColorA =  String.valueOf(color);
+strModeloA =  String.valueOf(modelo);
+strModeloB =  String.valueOf(modelob);
+strModeloC =  String.valueOf(modeloc);
+strSeccionA = String.valueOf(seccion);
+strTallaA = String.valueOf(talla);
+strTallaB = String.valueOf(tallab);
+strTallaC = String.valueOf(tallac);
+strTiendaA = String.valueOf(tienda);
+strFechaA = String.valueOf(System.currentTimeMillis()+op);
+
+churro = &quot;[&quot; +
+  &quot;{&quot;+
+    &quot;\&quot;updateId\&quot; :&quot; + strFechaA + &quot;,&quot; +
+    &quot;\&quot;store\&quot; :&quot; + strTiendaA + &quot;,&quot; +
+    &quot;\&quot;section\&quot; :&quot; + strSeccionA + &quot;,&quot; +
+    &quot;\&quot;changes\&quot; :&quot; + &quot;[&quot; +
+      &quot;{&quot; +
+        &quot;\&quot;to\&quot; : 1,&quot; +
+        &quot;\&quot;timestamp\&quot;: 1516614117701,&quot; +
+        &quot;\&quot;items\&quot;: [&quot; +
+          &quot;{&quot; +
+            &quot;\&quot;productCode\&quot;:&quot; +strProductoA + &quot;,&quot; +
+            &quot;\&quot;model\&quot;:&quot; + strModeloB + &quot;,&quot; +
+            &quot;\&quot;quality\&quot;:&quot; + strCalidadA + &quot;,&quot; +
+            &quot;\&quot;color\&quot;:&quot; + strColorA + &quot;,&quot; +
+            &quot;\&quot;size\&quot;: &quot; + strTallaA + &quot;,&quot; +
+            &quot;\&quot;serialNumber\&quot;: 1086554643&quot; +
+          &quot;},&quot; +
+          &quot;{&quot; +
+            &quot;\&quot;productCode\&quot;:&quot; + strProductoA + &quot;,&quot; +
+            &quot;\&quot;model\&quot;:&quot; + strModeloC + &quot;,&quot; +
+            &quot;\&quot;quality\&quot;:&quot; + strCalidadA + &quot;,&quot; +
+            &quot;\&quot;color\&quot;:&quot; +  strColorA + &quot;,&quot; +
+            &quot;\&quot;size\&quot;:&quot; +  strTallaC + &quot;,&quot; +
+            &quot;\&quot;serialNumber\&quot;: 984191606&quot; +
+          &quot;}&quot; +
+        &quot;]&quot; +
+      &quot;},&quot; +
+      &quot;{&quot; +
+        &quot;\&quot;to\&quot;: 3,&quot; +
+        &quot;\&quot;timestamp\&quot;: 1516614117701,&quot;+
+        &quot;\&quot;items\&quot;: [&quot; +
+           &quot;{&quot; +
+            &quot;\&quot;productCode\&quot;:&quot; + strProductoA + &quot;,&quot; +
+            &quot;\&quot;model\&quot;:&quot; + strModeloA + &quot;,&quot; +
+            &quot;\&quot;quality\&quot;:&quot; + strCalidadA + &quot;,&quot; +
+            &quot;\&quot;color\&quot;:&quot; + strColorA + &quot;,&quot; +
+            &quot;\&quot;size\&quot;:&quot; + strTallaA + &quot;,&quot; +
+            &quot;\&quot;serialNumber\&quot;: 1086554643&quot; +
+          &quot;}&quot; +
+        &quot;]&quot; +
+      &quot;}&quot; +
+    &quot;]&quot; +
+  &quot;}&quot; +
+&quot;]&quot;;
+
+vars.put(&quot;message&quot;, churro);
+
+
+
+
+
+
+
+
+
+</stringProp>
+          <stringProp name="scriptLanguage">java</stringProp>
+        </JSR223PreProcessor>
+        <hashTree/>
+        <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="Kafka Request" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="kafka_brokers" elementType="Argument">
+                <stringProp name="Argument.name">kafka_brokers</stringProp>
+                <stringProp name="Argument.value">130.61.86.204:6667,130.61.113.170:6667,130.61.47.254:6667,130.61.112.70:6667,130.61.87.248:6667</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_topic" elementType="Argument">
+                <stringProp name="Argument.name">kafka_topic</stringProp>
+                <stringProp name="Argument.value">parti5</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key</stringProp>
+                <stringProp name="Argument.value">${contadorA}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message</stringProp>
+                <stringProp name="Argument.value">${message}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_message_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_message_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.DefaultEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="kafka_key_serializer" elementType="Argument">
+                <stringProp name="Argument.name">kafka_key_serializer</stringProp>
+                <stringProp name="Argument.value">kafka.serializer.NullEncoder</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">co.signal.kafkameter.KafkaProducerSampler</stringProp>
+        </JavaSampler>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">true</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ResponseTimesOverTimeGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Response Times Over Time" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+          <longProp name="interval_grouping">500</longProp>
+          <boolProp name="graph_aggregated">false</boolProp>
+          <stringProp name="include_sample_labels"></stringProp>
+          <stringProp name="exclude_sample_labels"></stringProp>
+          <stringProp name="start_offset"></stringProp>
+          <stringProp name="end_offset"></stringProp>
+          <boolProp name="include_checkbox_state">false</boolProp>
+          <boolProp name="exclude_checkbox_state">false</boolProp>
+        </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
+        <hashTree/>
+        <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.BytesThroughputOverTimeGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Bytes Throughput Over Time" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+          <longProp name="interval_grouping">1000</longProp>
+          <boolProp name="graph_aggregated">false</boolProp>
+          <stringProp name="include_sample_labels"></stringProp>
+          <stringProp name="exclude_sample_labels"></stringProp>
+          <stringProp name="start_offset"></stringProp>
+          <stringProp name="end_offset"></stringProp>
+          <boolProp name="include_checkbox_state">false</boolProp>
+          <boolProp name="exclude_checkbox_state">false</boolProp>
+        </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
+        <hashTree/>
+        <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ThreadsStateOverTimeGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Active Threads Over Time" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+          <longProp name="interval_grouping">500</longProp>
+          <boolProp name="graph_aggregated">false</boolProp>
+          <stringProp name="include_sample_labels"></stringProp>
+          <stringProp name="exclude_sample_labels"></stringProp>
+          <stringProp name="start_offset"></stringProp>
+          <stringProp name="end_offset"></stringProp>
+          <boolProp name="include_checkbox_state">false</boolProp>
+          <boolProp name="exclude_checkbox_state">false</boolProp>
+        </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
